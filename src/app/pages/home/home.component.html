@@ -6,18 +6,30 @@
     Pesquise por todos os cursos do brasil utilizando o filtro que desejar!
   </span>
   <div class="container-inputs">
-    <mat-form-field class="full-width">
-      <mat-label>Curso</mat-label>
-      <input type="Curso" matInput placeholder="Ex. Direito">
-    </mat-form-field>
-    <mat-form-field class="full-width">
-      <mat-label>Estado</mat-label>
-      <mat-select>
-        <mat-option *ngFor=" let i of [1,2,3,4]" [value]="i">{{i}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+
+    <form [formGroup]="meuForm" (ngSubmit)="onSubmit()">
+      <mat-form-field class="full-width">
+        <mat-label>Nota de Corte</mat-label>
+        <input type="Nota de Corte" formControlName="notaCorte" matInput placeholder="Ex. 650">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Estado</mat-label>
+        <mat-select formControlName="uf">
+          <mat-option  *ngFor=" let i of estadosBrasileiros" [value]="i.sigla">{{i.nome}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Turno</mat-label>
+        <mat-select formControlName="turno">
+          <mat-option *ngFor=" let i of ['Noturno', 'Vespertino', 'Integral']" [value]="i">{{i}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+
   </div>
-  <button (click)="navigateToTable()" mat-raised-button color="primary">
+  <button (click)="onSubmit()"  mat-raised-button color="primary">
     Buscar
   </button>
 

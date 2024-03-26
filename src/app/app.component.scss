@@ -1,4 +1,19 @@
-.main-container-page{
-  background: #272e3a;
-  height: 100%;
+.floating-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  .container-utils{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    span{
+      margin-left: 10px;
+    }
+    mat-icon{
+      cursor: pointer;
+    }
+  }
+
 }

@@ -1,28 +1,42 @@
 import {Component} from '@angular/core';
 import {Color, ScaleType} from "@swimlane/ngx-charts";
-
-
-const ELEMENT_DATA: any[] = [
-  {estado: 'SP', curso: 'Direito', turno: 'Noturno', nota: 782.12},
-  {estado: 'RJ', curso: 'Matemática', turno: 'Noturno', nota: 870.12},
-  {estado: 'SE', curso: 'Sistemas de informação', turno: 'Matutino', nota: 650.12},
-  {estado: 'SP', curso: 'Eng Civil',  turno: 'Vespertino', nota: 723.12},
-];
+import {ApiService} from "../../service/api.service";
+import {ActivatedRoute} from "@angular/router";
+import {Curso} from "../../service/curso.model";
 
 @Component({
   selector: 'app-tabela-cursos',
   templateUrl: './tabela-cursos.component.html',
   styleUrls: ['./tabela-cursos.component.scss']
 })
-export class TabelaCursosComponent{
-  displayedColumns: string[] = ['estado', 'curso', 'turno', 'nota'];
-  dataSource = ELEMENT_DATA;
-  barChartData = this.dataSource.map(item => ({ name: item.curso, value: item.nota }));
+export class TabelaCursosComponent {
+
+  cursos: Curso[] = [];
+  barChartData: any[] = [];
+
+  constructor(
+    public api: ApiService,
+    private route: ActivatedRoute
+  ) {
+    this.api.cursoByName(this.route.snapshot.queryParams).subscribe(i => {
+      const response = i.sort(function(a, b){
+        return +b.nota_corte - +a.nota_corte;
+      }).slice(0,10)
+
+      console.log(response)
+      this.barChartData = response.map(item => ({ name: `${item.nome_curso + ' ' + item.id_concorrencia}`, value: +item.nota_corte }));
+      this.cursos = response
+    })
+  }
+
+  displayedColumns: string[] = ['codigo_curso', 'nome_curso', 'nome_campus', 'nota_corte', 'mod_concorrencia', 'id_concorrencia', 'turno'];
   colorSets: Color =
     {
       name: 'Vibrant',
       selectable: true,
       group: ScaleType.Time,
-      domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+      domain: ['#CC5544', '#77DD22', '#BB1100', '#CC9900', '#33BB77', '#AA3399', '#11AAFF', '#FF8833', '#55CC22', '#FF00FF']
     }
+
+
 }

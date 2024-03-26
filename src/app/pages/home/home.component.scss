@@ -1,22 +1,25 @@
 .container-home-page{
-  height: calc(100% - 164px);
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   span{
-    color: white;
+    color: black;
+    margin-bottom: 40px;
     &:first-child{
       font-size: 24px;
       margin-bottom: 15px;
     }
   }
   .container-inputs{
-    display: flex;
-    gap: 20px;
-    border-radius: 8px;
-    .full-width {
-      width: 300px;
+    form{
+      display: flex;
+      gap: 20px;
+      border-radius: 8px;
+      .full-width {
+        width: 300px;
+      }
     }
   }
 }

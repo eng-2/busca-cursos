@@ -1,5 +1,9 @@
-<mat-toolbar color="primary">
-  <span>Busca Curso</span>
+<mat-toolbar color="primary" class="floating-toolbar">
+  <div class="container-utils">
+    <mat-icon (click)="backPage()" aria-hidden="false" aria-label="Example home icon">arrow_back</mat-icon>
+    <span>Busca Curso</span>
+  </div>
+
 </mat-toolbar>
 <div class="main-container-page">
   <router-outlet></router-outlet>

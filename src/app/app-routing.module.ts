@@ -5,6 +5,11 @@ import {TabelaCursosComponent} from "./pages/tabela-cursos/tabela-cursos.compone
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'buscar-curso',
+    pathMatch: 'full'
+  },
+  {
     path: 'busca-curso',
     component: HomeComponent
   },
