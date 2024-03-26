@@ -33,7 +33,7 @@ export class TabelaCursosComponent {
       name: 'Vibrant',
       selectable: true,
       group: ScaleType.Time,
-      domain: ['#CC5544', '#77DD22', '#BB1100', '#CC9900', '#33BB77', '#AA3399', '#11AAFF', '#FF8833', '#55CC22', '#FF00FF']
+      domain: ['#77DD22', '#AA3399', '#FF00FF', '#BB1100', '#CC9900', '#FF8833', '#55CC22', '#CC5544', '#33BB77', '#11AAFF']
     }
 
 
