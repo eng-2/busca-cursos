@@ -12,7 +12,8 @@ export class ApiService {
     public http: HttpClient
   ) { }
 
-  cursoByName(params: any): Observable<Array<Curso>>{
-    return this.http.get<Array<Curso>>('http://localhost:3000/cursos_por_nota', {params})
+  filterCourses(params: any): Observable<Array<Curso>>{
+    return this.http.get<Array<Curso>>('http://localhost:3000/cursos_por_nota', { params })
   }
 }
+

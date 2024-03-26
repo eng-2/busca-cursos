@@ -18,7 +18,7 @@ export class TabelaCursosComponent {
     public api: ApiService,
     private route: ActivatedRoute
   ) {
-    this.api.cursoByName(this.route.snapshot.queryParams).subscribe(i => {
+    this.api.filterCourses(this.route.snapshot.queryParams).subscribe(i => {
       const response = i.sort(function(a, b){
         return +b.nota_corte - +a.nota_corte;
       }).slice(0,10)
