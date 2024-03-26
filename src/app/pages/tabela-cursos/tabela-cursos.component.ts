@@ -12,7 +12,7 @@ import {Curso} from "../../service/curso.model";
 export class TabelaCursosComponent {
 
   cursos: Curso[] = [];
-  barChartData: any[] = [];
+  barChartData: { name: string, value: number }[] = [];
 
   constructor(
     public api: ApiService,
@@ -22,8 +22,6 @@ export class TabelaCursosComponent {
       const response = i.sort(function(a, b){
         return +b.nota_corte - +a.nota_corte;
       }).slice(0,10)
-
-      console.log(response)
       this.barChartData = response.map(item => ({ name: `${item.nome_curso + ' ' + item.id_concorrencia}`, value: +item.nota_corte }));
       this.cursos = response
     })
