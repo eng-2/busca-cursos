@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {Color, ScaleType} from "@swimlane/ngx-charts";
-import {ApiService} from "../../service/api.service";
 import {ActivatedRoute} from "@angular/router";
 import {Curso} from "../../service/curso.model";
+import {CursosFacade} from "../../facade/cursos-facade";
 
 @Component({
   selector: 'app-tabela-cursos',
@@ -15,15 +15,12 @@ export class TabelaCursosComponent {
   barChartData: { name: string, value: number }[] = [];
 
   constructor(
-    public api: ApiService,
+    public cursosFacade: CursosFacade,
     private route: ActivatedRoute
   ) {
-    this.api.filterCourses(this.route.snapshot.queryParams).subscribe(i => {
-      const response = i.sort(function(a, b){
-        return +b.nota_corte - +a.nota_corte;
-      }).slice(0,10)
-      this.barChartData = response.map(item => ({ name: `${item.nome_curso + ' ' + item.id_concorrencia}`, value: +item.nota_corte }));
-      this.cursos = response
+    this.cursosFacade.getCourse(this.route.snapshot.queryParams).subscribe(i => {
+      this.barChartData = i.barChart.slice(0,10);
+      this.cursos = i.courses.slice(0,10)
     })
   }
 
